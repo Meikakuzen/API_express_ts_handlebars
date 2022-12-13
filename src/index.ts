@@ -2,6 +2,7 @@ import express from 'express'
 import {engine} from 'express-handlebars'
 import path from 'path'
 import IndexRoutes from './routes/index.routes'
+import BooksRoutes from './routes/books.routes'
 
 const app = express()
 
@@ -14,7 +15,8 @@ app.engine('.hbs', engine({
     extname: '.hbs',
     layoutsDir: path.join(app.get('views'), 'layouts'),
     partialsDir: path.join(app.get('views'), 'partials'),
-    helpers: require('./lib/helpers')
+    helpers: require('./lib/helpers'),
+    defaultLayout: 'main'
 }))
 
 app.set('view engine', '.hbs')
@@ -23,12 +25,14 @@ app.set('view engine', '.hbs')
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+
 app.use(express.static(path.join(__dirname, 'public')))
 
 
 //Routes
 
-app.use('/books', IndexRoutes)
+app.use('/', IndexRoutes)
+app.use('/books', BooksRoutes)
 
 //Static Files
 

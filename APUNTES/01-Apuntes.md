@@ -21,6 +21,8 @@
 
 > tsc --init
 
+- Incluyo todos los archivos de src en tsconfig
+- Excluyo node_modules
 - Mi archivo tsconfig queda así
 
 ~~~js
@@ -399,7 +401,6 @@ export default router
 - Creo el archivo main.hbs en layouts
 -----
 
-- PUNTO: 48:15
 
 
 

@@ -5,5 +5,9 @@ const router: Router = Router()
 
 router.get('/', indexController.index)
 
+router.get('/about', (req,res)=>{
+    res.render('about')
+})
+
 
 export default router

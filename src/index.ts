@@ -5,6 +5,7 @@ import IndexRoutes from './routes/index.routes'
 import BooksRoutes from './routes/books.routes'
 
 const app = express()
+import './database'
 
 //Settings
 

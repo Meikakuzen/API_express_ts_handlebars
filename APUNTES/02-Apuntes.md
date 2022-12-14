@@ -202,10 +202,91 @@ app.use('/books', BooksRoutes)
 <title>TsNode App {{title}} </title>
 ~~~
 
-- Pinto el add.hbs
+- Pinto el add.hbs con el formulario
 
 ~~~html
-1:08:29
+<div class="col-md-4 mx-auto">
+    <div class="card card-body">
+    <form action="">
+        <div class="form-group">
+            <input type="text" name="title" class="form-control" placeholder="Book Title" autofocus required>
+        </div>
+    </form>
+</div>
+</div>
+~~~
+
+- Para que quede bonito , meto el body en una fila ( en el main )
+- main.hbs
+
+~~~js
+<body>
+
+    {{> navigation}}
+
+    <div class="container p-4">
+        <div class="row">
+            {{{body}}}
+
+        </div>
+
+    </div>
+    
+</body>
+~~~
+
+- Con pattern (de html) puedo validar el isbn.
+- Busco en internet html isbn patterns y lo copio
+
+> (?:(?=.{17}$)97[89][ -](?:[0-9]+[ -]){2}[0-9]+[ -][0-9]|97[89][0-9]{10}|(?=.{13}$)(?:[0-9]+[ -]){2}[0-9]+[ -][0-9Xx]|[0-9]{9}[0-9Xx])
+
+~~~html
+<div class="col-md-4 mx-auto">
+    <div class="card card-body">
+    <form action="">
+        <div class="form-group">
+            <input type="text" name="title" class="form-control" placeholder="Book Title" autofocus required>
+        </div>
+        <div class="form-group">
+            <input type="text" name="author" class="form-control" placeholder="Author"  required>
+        </div>
+        <div class="form-group">
+            <input type="text" name="isbn" class="form-control" pattern="(?:(?=.{17}$)97[89][ -](?:[0-9]+[ -]){2}[0-9]+[ -][0-9]|97[89][0-9]{10}|(?=.{13}$)(?:[0-9]+[ -]){2}[0-9]+[ -][0-9Xx]|[0-9]{9}[0-9Xx])" placeholder="ISBN" >
+        </div>
+        <button class="btn btn-primary btn-block"> Save </button>
+    </form>
+</div>
+</div>
+~~~
+
+- A dónde envía la información? A mi servidor '/books/add'. Uso el form action
+
+~~~html
+<form action="/books/add" method="POST">
+~~~
+
+- Creo una ruta en books.router para que lo pueda recibir
+- Pero tengo que crear un método en el books.controllers
+- books.controller
+
+~~~js
+    public saveBook(req: Request, res: Response): void{
+        console.log(req.body)
+        res.send('received!')
+    }
+~~~
+
+- books.routes
+~~~js
+router.post('/add', booksController.saveBook)
+~~~
+
+- Si ahora introduzco los datos en el formulario los imprime en consola
+
+
+
+
+
 
 
 

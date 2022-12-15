@@ -7,11 +7,10 @@ class BooksController{
             title: 'Add a Book'
         })
     }
-    public async indexBooks(req:Request, res:Response){
+    public async indexBooks(_:Request, res:Response){
        
-        const books: BookInterface[]= await Book.find()
+        const books: BookInterface[]= await Book.find().lean()
         res.render('books/index',{
-            title: 'Books',
             books
         })
     }

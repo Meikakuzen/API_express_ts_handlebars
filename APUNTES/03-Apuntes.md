@@ -89,12 +89,12 @@ export default model<BookInterface>('Book', BookSchema)
     }
 ~~~
 
-- En el método indexBooks de BooksController hago una consulta a la db con Book.find()
+- En el método indexBooks de BooksController hago una consulta a la db con Book.find().lean()
 
 ~~~js
     public async indexBooks(req:Request, res:Response){
        
-        const books: BookInterface[]= await Book.find()
+        const books: BookInterface[]= await Book.find().lean()
         res.render('books/index',{
             title: 'Books',
             books
